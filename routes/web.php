@@ -26,6 +26,15 @@ Route::get('/about', function () {
 });
 
 
-Route::get('/customers', 'CustomersController@list');
-Route::post('/customers', 'CustomersController@store');
+Route::resource('customers', 'CustomersController');
+
+
+// Route::get('/customers', 'CustomersController@index');  
+// Route::get('/customers/create', 'CustomersController@create');
+// Route::post('/customers', 'CustomersController@store');
+// Route::get('/customers/{customer}', 'CustomersController@show');
+// Route::get('/customers/{customer}/edit', 'CustomersController@edit');
+// Route::put('/customers/{customer}', 'CustomersController@update');
+// Route::get('/customers/{customer}/edit', 'CustomersController@edit');
+// Route::delete('/customers/{customer}', 'CustomersController@destory');
 

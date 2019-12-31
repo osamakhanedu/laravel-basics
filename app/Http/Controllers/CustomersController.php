@@ -9,31 +9,33 @@ use App\Company;
 class CustomersController extends Controller
 {
     //
-     public function list()
+
+
+
+     public function index()
     {
 
-        $activeCustomers = Customer::active()->get();
-        $inactiveCustomers = Customer::inactive()->get();
-        $companies = Company::all();
-        //  $customers = Customer::all();
+        // $activeCustomers = Customer::active()->get();
+        // $inactiveCustomers = Customer::inactive()->get();
+        // $companies = Company::all();
+         $customers = Customer::all();
     
-        return view('internal.customer',compact('activeCustomers','inactiveCustomers','companies')
-           
-        );    
+        return view('customers.index',compact('customers'));    
         
+    }
+
+    public function create()
+    {
+        # code...
+        $companies = Company::all();
+        $customer = new Customer();
+        return view('customers.create',compact('companies','customer'));
     }
 
     public function store()
     {
 
-        $data = request()->validate([
-            'name'=> 'required|min:3',
-            'email'=> 'required|email',
-            'active'=> 'required',
-            'company_id'=>'required'
-        ]);
-      
-        Customer::create($data);
+        Customer::create($this->validateRequest());
 
         // $customer = new Customer();
         // $customer->name = request('name');
@@ -41,6 +43,47 @@ class CustomersController extends Controller
         // $customer->active = request('active');
         // $customer->save();
 
-        return back();
+        return redirect('customers');
+    }
+
+    // route model binding
+    public function show(Customer $customer)
+    {
+        // $customer = Customer::where("id",$customer)->firstOrFail();
+        
+        return view('customers.show',compact('customer'));
+    }
+    public function edit(Customer $customer)
+    {
+        // $customer = Customer::where("id",$customer)->firstOrFail();
+        
+        $companies = Company::all();
+        return view('customers.edit',compact('customer','companies'));
+    }
+    public function update(Customer $customer)
+    {
+        // $customer = Customer::where("id",$customer)->firstOrFail();
+        
+        $customer->update($this->validateRequest());
+
+        return redirect('customers/'.$customer->id);
+        // return view('customers.show',compact('customer'));
+    }
+    public function destory(Customer $customer)
+    {
+        
+        $customer->delete();
+
+        return redirect('customers/');
+    }
+
+    private function validateRequest(){
+        return request()->validate([
+            'name'=> 'required|min:3',
+            'email'=> 'required|email',
+            'active'=> 'required',
+            'company_id'=>'required'
+        ]);
+      
     }
 }
