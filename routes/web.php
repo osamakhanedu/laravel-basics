@@ -21,6 +21,9 @@ Route::get('/contact', function () {
  
 });
 
+Route::get('/contact', 'ContactController@create');
+Route::post('/contact', 'ContactController@store');
+
 Route::get('/about', function () {
     return view('about');    
 });
