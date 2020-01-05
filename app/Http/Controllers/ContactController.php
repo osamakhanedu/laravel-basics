@@ -29,6 +29,6 @@ class ContactController extends Controller
            Mail::to('test@test.com')->send(new ContactFormMail($data));
            
 
-           return view('contact.create');
+           return redirect('/contact')->with('msg',"for your message.");
     }
 }

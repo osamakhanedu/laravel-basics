@@ -41,3 +41,7 @@ Route::resource('customers', 'CustomersController');
 // Route::get('/customers/{customer}/edit', 'CustomersController@edit');
 // Route::delete('/customers/{customer}', 'CustomersController@destory');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
