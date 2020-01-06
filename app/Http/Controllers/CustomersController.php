@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Company;
+use App\Events\newCustomerRegisterEvent;
 
 class CustomersController extends Controller
 {
@@ -41,8 +42,11 @@ class CustomersController extends Controller
     public function store()
     {
 
-        Customer::create($this->validateRequest());
+        $customer = Customer::create($this->validateRequest());
 
+        // trigger event
+       event(new newCustomerRegisterEvent($customer));
+        
         // $customer = new Customer();
         // $customer->name = request('name');
         // $customer->email = request('email');
