@@ -11,6 +11,12 @@ class CustomersController extends Controller
     //
 
 
+    public function __construct()
+    {
+        # code...
+        // $this->middleware('auth');
+         $this->middleware('auth')->except(['index']);
+    }
 
      public function index()
     {

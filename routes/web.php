@@ -21,14 +21,15 @@ Route::get('/contact', function () {
  
 });
 
-Route::get('/contact', 'ContactController@create');
-Route::post('/contact', 'ContactController@store');
+Route::get('/contact', 'ContactController@create')->name('contact.create');
+Route::post('/contact', 'ContactController@store')->name('contact.store');
 
 Route::get('/about', function () {
     return view('about');    
 });
 
 
+// Route::resource('customers', 'CustomersController')->middleware('auth');
 Route::resource('customers', 'CustomersController');
 
 

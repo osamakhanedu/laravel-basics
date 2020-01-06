@@ -15,7 +15,7 @@
 
 <div class="row">
   <div class="col-12">
-   <form action="/contact" method="post">
+  <form action="{{ route('contact.store') }}" method="post">
 
    <div class="form-group">
     <label for="name">Name</label>
